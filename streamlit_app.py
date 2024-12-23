@@ -155,7 +155,7 @@ EDA = pd.merge(EDA,
                on=['geo', 'time']
               )
 EDA['milk_yield'] = EDA['values_milk_on_farms'] / EDA['values_num_cows']
-average_milk_yield = EDA['milk_yield'].mean()*1000
+apparent_milk_yield = EDA['milk_yield'].mean()*1000
 
 # Calculate additional variables
 milk_prod_mln = EDA['values_milk_on_farms'] / 1000
