@@ -112,7 +112,7 @@ fig.update_layout(
                 xanchor='right', x=1)
 )
 
- Adding annotations for non-zero price changes
+# Adding annotations for non-zero price changes
 for i, row in data_ie.iterrows():
     if row['price_change'] != 0:        
         fig.add_annotation(
