@@ -209,7 +209,8 @@ fig.update_xaxes(
     title_text='Dairy cows (thousand heads)',
     type='log',
     tickvals=[1, 10, 100, 1000],
-    ticktext=['1', '10', '100', '1000']
+    ticktext=['1', '10', '100', '1000'],
+    range=[min(EDA['values_num_cows']) * 0.9, max(EDA['values_num_cows']) * 1.1] 
 )
 
 # Set y-axis
