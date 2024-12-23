@@ -112,7 +112,7 @@ fig.update_layout(
                 xanchor='right', x=1)
 )
 
-# Adding annotations for non-zero price changes
+ Adding annotations for non-zero price changes
 for i, row in data_ie.iterrows():
     if row['price_change'] != 0:        
         fig.add_annotation(
@@ -161,7 +161,7 @@ EDA['apparent_milk_yield'] = EDA['milk_yield'] * 1000
 EDA['milk_prod_mln'] = EDA['values_milk_on_farms'] / 1000
 dairy_cows_range = np.linspace(min(EDA['values_num_cows']), max(EDA['values_num_cows']), 100)
 milk_production_curve = (dairy_cows_range / 1000) * (EDA['apparent_milk_yield'].mean() / 1000)
-marker_size = (EDA['values'] / EDA['values'].max()) * 70
+marker_size = (EDA['values'] / EDA['values'].max()) * 50
 
 
 # Create Plotly figure
@@ -183,18 +183,18 @@ fig.add_trace(go.Scatter(
     name='Countries'
 ))
 
-# Annotate specific countries
-for i, row in EDA.iterrows():
-    if row['geo'] in ['IE', 'DK', 'NL']:
-        fig.add_annotation(
-            x=row['values_num_cows'],
-            y=row['milk_prod_mln'],
-            text=row['geo'],
-            showarrow=True,
-            arrowhead=2,
-            ax=row['values_num_cows'] * 0.05,  # Adjust arrow x-offset
-            ay=row['milk_prod_mln'] * 0.05  # Adjust arrow y-offset
-        )
+## Annotate specific countries
+#for i, row in EDA.iterrows():
+#    if row['geo'] in ['IE', 'DK', 'NL']:
+#        fig.add_annotation(
+#            x=row['values_num_cows'],
+#            y=row['milk_prod_mln'],
+#            text=row['geo'],
+#            showarrow=True,
+#            arrowhead=2,
+#            ax=row['values_num_cows'] * 0.05,  # Adjust arrow x-offset
+#            ay=row['milk_prod_mln'] * 0.05  # Adjust arrow y-offset
+#        )
 
 # Add line for average milk yield
 fig.add_trace(go.Scatter(
