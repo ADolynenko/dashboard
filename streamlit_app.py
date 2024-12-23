@@ -85,8 +85,9 @@ fig.add_trace(
         x=data_ie['time'],
         y=data_ie['price_change'],
         name='Price Change (%)',
-        marker=dict(color='lightgray'),
-        opacity=0.7
+        marker=dict(color='lightgray',
+                    opacity=0.7),
+        yaxis='y2'
     )
 )
 
