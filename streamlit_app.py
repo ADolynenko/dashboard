@@ -172,15 +172,14 @@ fig.add_trace(go.Scatter(
     x=EDA['values_num_cows'],
     y=EDA['milk_prod_mln'],
     mode='markers+text',
-    #text=EDA['geo'],
-    #textposition='top center',
+    hovertext=EDA['geo'],
     marker=dict(
         size=marker_size,
         color='red',
         opacity=0.8,
         line=dict(width=1, color='black')
     ),
-    name='Countries'
+    name='Country'
 ))
 
 
