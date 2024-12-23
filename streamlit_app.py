@@ -119,7 +119,7 @@ for i, row in data_ie.iterrows():
                 showarrow=True,
                 arrowhead=2,
                 ax=0,
-                ay=-20 if row['price_change'] > 0 else 20,
+                ay=20 if row['price_change'] > 0 else -20,
                 font=dict(size=10)
             )
 
