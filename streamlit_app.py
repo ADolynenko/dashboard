@@ -196,9 +196,10 @@ fig.add_trace(go.Scatter(
 for index, row in EDA.iterrows():
     if row['geo'] in ['IE', 'DK', 'NL']:
         fig.add_annotation(
-            x=row['values_num_cows'],
+            x=np.log10(row['values_num_cows']),
             y=row['milk_prod_mln'],
             text=row['geo'],
+            arrowhead=2,
             ax=20, ay=-30,
             font=dict(size=10)
         )
