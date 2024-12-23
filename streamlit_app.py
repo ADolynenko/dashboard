@@ -193,13 +193,22 @@ fig.add_trace(go.Scatter(
     name=f'Average apparent milk yield ({year})'
 ))
 
+for index, row in EDA.iterrows():
+    if row['geo'] in ['IE', 'DK', 'NL']:
+        fig.add_annotation(
+            x=row['values_num_cows'],
+            y=row['milk_prod_mln'],
+            text=row['geo'],
+            font=dict(size=10)
+        )
+
 # Set log scale for x-axis
 fig.update_xaxes(
     title_text='Dairy cows (thousand heads)',
     type='log',
     tickvals=[1, 10, 100, 1000],
     ticktext=['1', '10', '100', '1000'],
-    
+    range=[min(EDA['values_num_cows']) * 0.9, max(EDA['values_num_cows']) * 1.1]
 )
 
 # Set y-axis
@@ -216,18 +225,7 @@ fig.update_layout(
     legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
     template='plotly_white'
 )
-for index, row in EDA.iterrows():
-    if row['geo'] in ['IE', 'DK', 'NL']:
-        fig.add_annotation(
-            x=row['values_num_cows'],
-            y=row['milk_prod_mln'],
-            text=row['geo'],
-            #showarrow=True,
-            #arrowhead=2,
-            #ax=row['values_num_cows'] * 0.05,  # Adjust arrow x-offset
-            #ay=row['milk_prod_mln'] * 0.05,  # Adjust arrow y-offset
-            font=dict(size=10)
-        )
+
 # Display in Streamlit
 st.plotly_chart(fig)
 
