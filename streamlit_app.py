@@ -155,13 +155,14 @@ EDA = pd.merge(EDA,
                on=['geo', 'time']
               )
 EDA['milk_yield'] = EDA['values_milk_on_farms'] / EDA['values_num_cows']
-apparent_milk_yield = EDA['milk_yield'].mean()*1000
+EDA['apparent_milk_yield'] = EDA['milk_yield_per_cow'] * 1000
 
 # Calculate additional variables
-milk_prod_mln = EDA['values_milk_on_farms'] / 1000
+EDA['milk_prod_mln'] = EDA['values_milk_on_farms'] / 1000
 dairy_cows_range = np.logspace(0.5, 3.65, 100)
-milk_production_curve = (dairy_cows_range / 1000) * (apparent_milk_yield / 1000)
+milk_production_curve = (dairy_cows_range / 1000) * (apparent_milk_yield.mean() / 1000)
 marker_size = (EDA['values'] / EDA['values'].max()) * 70
+
 
 # Create Plotly figure
 fig = go.Figure()
@@ -169,7 +170,7 @@ fig = go.Figure()
 # Scatter plot for countries
 fig.add_trace(go.Scatter(
     x=EDA['values_num_cows'],
-    y=milk_prod_mln,
+    y=EDA['milk_prod_mln'],
     mode='markers+text',
     text=EDA['geo'],
     textposition='top center',
@@ -187,12 +188,12 @@ for i, row in EDA.iterrows():
     if row['geo'] in ['IE', 'DK', 'NL']:
         fig.add_annotation(
             x=row['values_num_cows'],
-            y=row['values_milk_on_farms'] / 1000,
+            y=row['milk_prod_mln'],
             text=row['geo'],
             showarrow=True,
             arrowhead=2,
             ax=row['values_num_cows'] * 0.2,  # Adjust arrow x-offset
-            ay=row['values_milk_on_farms'] / 1000 * 0.1  # Adjust arrow y-offset
+            ay=row['milk_prod_mln'] * 0.1  # Adjust arrow y-offset
         )
 
 # Add line for average milk yield
@@ -210,7 +211,7 @@ fig.update_xaxes(
     type='log',
     tickvals=[1, 10, 100, 1000],
     ticktext=['1', '10', '100', '1000'],
-    range=[min(EDA['values_num_cows']) * 0.9, max(EDA['values_num_cows']) * 1.1] 
+    
 )
 
 # Set y-axis
