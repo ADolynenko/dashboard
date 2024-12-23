@@ -97,7 +97,8 @@ fig.update_layout(
     yaxis=dict(title='Raw Milk Price (per 100 kg)', 
                titlefont=dict(color='black'), 
                showgrid=True,
-              range=[25, 62]),
+              #range=[20, 65]
+              ),
     yaxis2=dict(
         title='Percentage Change (%)',
         overlaying='y',
