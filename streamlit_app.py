@@ -122,8 +122,7 @@ for i, row in data_ie.iterrows():
                 arrowhead=2,
                 ax=0,
                 ay=20 if row['price_change'] > 0 else -20,
-                font=dict(size=10),
-            yref='y2'
+                font=dict(size=10)
             )
 
 # Show in Streamlit
