@@ -199,6 +199,7 @@ for index, row in EDA.iterrows():
             x=row['values_num_cows'],
             y=row['milk_prod_mln'],
             text=row['geo'],
+            ax=20, ay=-30,
             font=dict(size=10)
         )
 
