@@ -160,7 +160,7 @@ EDA['apparent_milk_yield'] = EDA['milk_yield'] * 1000
 # Calculate additional variables
 EDA['milk_prod_mln'] = EDA['values_milk_on_farms'] / 1000
 dairy_cows_range = np.linspace(min(EDA['values_num_cows']), max(EDA['values_num_cows']), 100)
-milk_production_curve = (dairy_cows_range / 1000) * (EDA['apparent_milk_yield'].mean() / 1000)
+milk_production_curve = (dairy_cows_range / 1000) * (EDA['apparent_milk_yield']['geo'].mean() / 1000)
 marker_size = (EDA['values'] / EDA['values'].max()) * 30
 
 
@@ -172,7 +172,7 @@ fig.add_trace(go.Scatter(
     x=EDA['values_num_cows'],
     y=EDA['milk_prod_mln'],
     mode='markers+text',
-    text=[country if country in ['IE', 'DK', 'NL'] else '' for country in EDA['geo']],
+    text=EDA['geo'],
     textposition='top center',
     marker=dict(
         size=marker_size,
