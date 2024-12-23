@@ -184,17 +184,17 @@ fig.add_trace(go.Scatter(
 ))
 
 # Annotate specific countries
-#for i, row in EDA.iterrows():
- #   if row['geo'] in ['IE', 'DK', 'NL']:
-  #      fig.add_annotation(
-   #         x=row['values_num_cows'],
-    #        y=row['milk_prod_mln'],
-     #       text=row['geo'],
-      #      showarrow=True,
-       #     arrowhead=2,
-        #    ax=row['values_num_cows'] * 0.2,  # Adjust arrow x-offset
-      #      ay=row['milk_prod_mln'] * 0.1  # Adjust arrow y-offset
-       # )
+for i, row in EDA.iterrows():
+    if row['geo'] in ['IE', 'DK', 'NL']:
+        fig.add_annotation(
+            x=row['values_num_cows'],
+            y=row['milk_prod_mln'],
+            text=row['geo'],
+            showarrow=True,
+            arrowhead=2,
+            ax=row['values_num_cows'] * 0.05,  # Adjust arrow x-offset
+            ay=row['milk_prod_mln'] * 0.05  # Adjust arrow y-offset
+        )
 
 # Add line for average milk yield
 fig.add_trace(go.Scatter(
