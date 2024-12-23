@@ -208,7 +208,7 @@ fig.update_xaxes(
     type='log',
     tickvals=[1, 10, 100, 1000],
     ticktext=['1', '10', '100', '1000'],
-    range=[min(EDA['values_num_cows']) * 0.9, max(EDA['values_num_cows']) * 1.1]
+    range=[np.log10(min(EDA['values_num_cows']) * 0.9), np.log10(max(EDA['values_num_cows']) * 1.1)]
 )
 
 # Set y-axis
