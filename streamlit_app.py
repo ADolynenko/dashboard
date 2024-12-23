@@ -193,7 +193,7 @@ for i, row in EDA.iterrows():
             showarrow=True,
             arrowhead=2,
             ax=row['values_num_cows'] * 0.05,  # Adjust arrow x-offset
-            ay=row['milk_prod_mln'] * 0.05  # Adjust arrow y-offset
+            ay=row['milk_prod_mln'] * 0.05,  # Adjust arrow y-offset
             xshift=10,  # Adjust arrowhead position horizontally
             yshift=10,  # Adjust arrowhead position vertically
         )
