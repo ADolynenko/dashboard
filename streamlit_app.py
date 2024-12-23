@@ -37,7 +37,7 @@ selected_countries = st.multiselect("Select Countries",
                                    )  # Allow user selection
 
 data_raw = get_eurostat_data(dataset_code, params={'geo': selected_countries})
-label = data_raw.label
+label = data_raw.label 
 data = data_raw.to_dataframe()
 
 if data is not None:
@@ -127,3 +127,106 @@ for i, row in data_ie.iterrows():
 
 # Show in Streamlit
 st.plotly_chart(fig)
+
+gdp_code = "tipsna40"
+collection_code = "tag00041"
+cows_code = "tag00014"
+years = ['2020', '2021', '2022', '2023']
+countries = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI',
+       'FR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL',
+       'PT', 'RO', 'SE', 'SI', 'SK']
+year = st.selectbox("Select Year", years)
+gdp_raw = get_eurostat_data(gdp_code, params={'geo': countries, "time": year})
+milk_raw = get_eurostat_data(collection_code, params={'geo': countries, "time": year})
+cows_raw = get_eurostat_data(cows_code, params={'geo': countries, "time": year})
+gdp = gdp_raw.to_dataframe()
+collection = milk_raw.to_dataframe()
+cows = cows_raw.to_dataframe()
+
+EDA = pd.merge(collection.drop(columns=['freq', 'milkitem', 'dairyprod']), 
+                 cows.drop(columns=['freq', 'animals', 'month', 'unit']),
+                on=['geo', 'time'],
+              suffixes=('_milk_on_farms', '_num_cows')
+              )
+
+EDA = pd.merge(EDA,
+               gdp.drop(columns=['freq', 'unit', 'na_item']),
+               on=['geo', 'time']
+              )
+EDA['milk_yield'] = EDA['values_milk_on_farms'] / EDA['values_num_cows']
+average_milk_yield = EDA['milk_yield'].mean()*1000
+
+# Calculate additional variables
+milk_prod_mln = EDA['values_milk_on_farms'] / 1000
+dairy_cows_range = np.logspace(0.5, 3.65, 100)
+milk_production_curve = (dairy_cows_range / 1000) * (apparent_milk_yield / 1000)
+marker_size = (EDA['values'] / EDA['values'].max()) * 70
+
+# Create Plotly figure
+fig = go.Figure()
+
+# Scatter plot for countries
+fig.add_trace(go.Scatter(
+    x=EDA['values_num_cows'],
+    y=milk_prod_mln,
+    mode='markers+text',
+    text=EDA['geo'],
+    textposition='top center',
+    marker=dict(
+        size=marker_size,
+        color='red',
+        opacity=0.8,
+        line=dict(width=1, color='black')
+    ),
+    name='Countries'
+))
+
+# Annotate specific countries
+for i, row in EDA.iterrows():
+    if row['geo'] in ['IE', 'DK', 'NL']:
+        fig.add_annotation(
+            x=row['values_num_cows'],
+            y=row['values_milk_on_farms'] / 1000,
+            text=row['geo'],
+            showarrow=True,
+            arrowhead=2,
+            ax=row['values_num_cows'] * 0.2,  # Adjust arrow x-offset
+            ay=row['values_milk_on_farms'] / 1000 * 0.1  # Adjust arrow y-offset
+        )
+
+# Add line for average milk yield
+fig.add_trace(go.Scatter(
+    x=dairy_cows_range,
+    y=milk_production_curve,
+    mode='lines',
+    line=dict(color='green', dash='dash'),
+    name=f'Average apparent milk yield ({year})'
+))
+
+# Set log scale for x-axis
+fig.update_xaxes(
+    title_text='Dairy cows (thousand heads)',
+    type='log',
+    tickvals=[1, 10, 100, 1000],
+    ticktext=['1', '10', '100', '1000']
+)
+
+# Set y-axis
+fig.update_yaxes(
+    title_text='Raw milk produced (mln t)',
+    range=[0, 40]
+)
+
+# Update layout
+fig.update_layout(
+    title=f'Dairy Cows and Milk Production with Apparent Milk Yield in EU ({year})',
+    xaxis=dict(showgrid=True),
+    yaxis=dict(showgrid=True),
+    legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
+    template='plotly_white'
+)
+
+# Display in Streamlit
+st.plotly_chart(fig)
+
+
