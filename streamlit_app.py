@@ -90,42 +90,38 @@ fig.add_trace(
     )
 )
 
+fig.update_layout(
+    title='Raw Milk Price in Ireland Over Time',
+    xaxis=dict(title='Year'),
+    yaxis=dict(title='Raw Milk Price (per 100 kg)', 
+               titlefont=dict(color='black'), 
+               showgrid=True),
+    yaxis2=dict(
+        title='Percentage Change (%)',
+        overlaying='y',
+        side='right',
+        titlefont=dict(color='gray'),
+        showgrid=False
+    ),
+    legend=dict(orientation='h', 
+                yanchor='bottom', 
+                y=1.02, 
+                xanchor='right', x=1)
+)
+
 # Adding annotations for non-zero price changes
-annotations = []
 for i, row in data_ie.iterrows():
-    if row['price_change'] != 0:
-        annotations.append(
-            dict(
+    if row['price_change'] != 0:        
+        fig.add_annotation(
                 x=row['time'],
                 y=row['price_change'],
                 text=f"{row['price_change']:.1f}%",
                 showarrow=True,
                 arrowhead=2,
                 ax=0,
-                ay=-20,
+                ay=-20 if row['price_change'] > 0 else 20,
                 font=dict(size=10)
             )
-        )
-
-fig.update_layout(
-    title='Raw Milk Price in Ireland Over Time',
-    xaxis=dict(title='Year'),
-    yaxis=dict(title='Raw Milk Price (per 100 kg)', titlefont=dict(color='black')),
-    yaxis2=dict(
-        title='Percentage Change (%)',
-        overlaying='y',
-        side='right',
-        titlefont=dict(color='gray')
-    ),
-    annotations=annotations,
-    legend=dict(x=0.1, y=0.9),
-    template='plotly_white',
-    bargap=0.4
-)
-
-# Add gridlines
-fig.update_xaxes(showgrid=True)
-fig.update_yaxes(showgrid=True)
 
 # Show in Streamlit
 st.plotly_chart(fig)
