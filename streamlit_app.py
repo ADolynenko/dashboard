@@ -159,7 +159,7 @@ EDA['apparent_milk_yield'] = EDA['milk_yield'] * 1000
 
 # Calculate additional variables
 EDA['milk_prod_mln'] = EDA['values_milk_on_farms'] / 1000
-dairy_cows_range = np.logspace(0.5, 3.65, 100)
+dairy_cows_range = np.linspace(min(EDA['values_num_cows']), max(EDA['values_num_cows']), 100)
 milk_production_curve = (dairy_cows_range / 1000) * (EDA['apparent_milk_yield'].mean() / 1000)
 marker_size = (EDA['values'] / EDA['values'].max()) * 70
 
