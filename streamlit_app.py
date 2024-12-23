@@ -172,8 +172,8 @@ fig.add_trace(go.Scatter(
     x=EDA['values_num_cows'],
     y=EDA['milk_prod_mln'],
     mode='markers+text',
-    text=EDA['geo'],
-    textposition='top center',
+    #text=EDA['geo'],
+    #textposition='top center',
     marker=dict(
         size=marker_size,
         color='red',
@@ -182,7 +182,18 @@ fig.add_trace(go.Scatter(
     ),
     name='Countries'
 ))
-
+# Add annotations for specific countries
+for i, row in EDA.iterrows():
+    if row['geo'] in ['IE', 'DK', 'NL']:
+        fig.add_annotation(
+            x=row['values_num_cows'],
+            y=row['milk_prod_mln'],
+            text=row['geo'],
+            showarrow=True,
+            arrowhead=2,
+            ax=row['values_num_cows'] * 0.05,  # Adjust arrow x-offset
+            ay=row['milk_prod_mln'] * 0.05  # Adjust arrow y-offset
+        )
 # Add line for average milk yield
 fig.add_trace(go.Scatter(
     x=dairy_cows_range,
