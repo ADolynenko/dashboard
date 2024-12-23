@@ -137,9 +137,9 @@ countries = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI',
        'FR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL',
        'PT', 'RO', 'SE', 'SI', 'SK']
 year = st.selectbox("Select Year", years)
-gdp_raw = get_eurostat_data(gdp_code, params={'geo': countries, "time": year})
-milk_raw = get_eurostat_data(collection_code, params={'geo': countries, "time": year})
-cows_raw = get_eurostat_data(cows_code, params={'geo': countries, "time": year})
+gdp_raw = get_eurostat_data(gdp_code, params={'geo': , "time": year})
+milk_raw = get_eurostat_data(collection_code, params={'geo': , "time": year})
+cows_raw = get_eurostat_data(cows_code, params={'geo': , "time": year})
 gdp = gdp_raw.to_dataframe()
 collection = milk_raw.to_dataframe()
 cows = cows_raw.to_dataframe()
@@ -154,6 +154,9 @@ EDA = pd.merge(EDA,
                gdp.drop(columns=['freq', 'unit', 'na_item']),
                on=['geo', 'time']
               )
+
+EDA = EDA[(EDA['country'] = countries)]
+
 EDA['milk_yield'] = EDA['values_milk_on_farms'] / EDA['values_num_cows']
 EDA['apparent_milk_yield'] = EDA['milk_yield'] * 1000
 
