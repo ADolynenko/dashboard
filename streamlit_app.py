@@ -196,7 +196,7 @@ for i, row in EDA.iterrows():
             ay=row['milk_prod_mln'] * 0.05  # Adjust arrow y-offset
             xshift=10,  # Adjust arrowhead position horizontally
             yshift=10,  # Adjust arrowhead position vertically
-#        )
+        )
 
 # Add line for average milk yield
 fig.add_trace(go.Scatter(
