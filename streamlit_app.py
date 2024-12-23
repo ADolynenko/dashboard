@@ -96,7 +96,7 @@ for i, row in data_ie.iterrows():
     if row['price_change'] != 0:
         annotations.append(
             dict(
-                x=row['year'],
+                x=row['time'],
                 y=row['price_change'],
                 text=f"{row['price_change']:.1f}%",
                 showarrow=True,
