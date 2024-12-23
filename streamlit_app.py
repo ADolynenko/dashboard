@@ -172,7 +172,7 @@ fig.add_trace(go.Scatter(
     x=EDA['values_num_cows'],
     y=EDA['milk_prod_mln'],
     mode='markers+text',
-    text=EDA['geo'],
+    text=[country if country in ['IE', 'DK', 'NL'] else '' for country in EDA['geo']],
     textposition='top center',
     marker=dict(
         size=marker_size,
