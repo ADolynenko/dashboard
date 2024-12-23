@@ -158,7 +158,7 @@ EDA = pd.merge(EDA,
                on=['geo', 'time']
               )
 
-EDA = EDA[(EDA['country'] = countries)]
+EDA = EDA[(EDA['country'] == countries)]
 
 EDA['milk_yield'] = EDA['values_milk_on_farms'] / EDA['values_num_cows']
 EDA['apparent_milk_yield'] = EDA['milk_yield'] * 1000
