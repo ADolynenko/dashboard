@@ -46,20 +46,7 @@ data_raw = get_eurostat_data(dataset_code, params={'geo': selected_countries})
 label = data_raw.label 
 data = data_raw.to_dataframe()
 
-fig1 = go.Figure()  
-for country in data['geo'].unique(): 
-    country_data = data[data['geo'] == country] 
-    fig1.add_trace(go.Scatter( x=country_data['time'], 
-                              y=country_data['values'], 
-                              mode='lines+markers', name=country )) 
-fig1.update_layout(title=f"Eurostat Data: {label}", 
-                       xaxis=dict(title='Time'), 
-                       yaxis=dict(title='Values'), 
-                       legend=dict(orientation='h', 
-                                   yanchor='bottom', 
-                                   y=1.02, xanchor='right', 
-                                   x=1), 
-                       template='plotly_white' ) 
+fig1 = px.line(data, x='time', y='values', color='geo', title=f"Eurostat Data: {label}") 
 st.plotly_chart(fig1)
 
 data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
@@ -233,11 +220,4 @@ fig3.update_layout(
     template='plotly_white'
 )
 
-# Display in Streamlit
-st.plotly_chart(fig3)
-col1, col2 = st.columns(2)
-with col1: 
-    st.plotly_chart(fig1) 
-    st.plotly_chart(fig2) 
-with col2: 
-    st.plotly_chart(fig3)
+
