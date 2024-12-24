@@ -46,9 +46,8 @@ data_raw = get_eurostat_data(dataset_code, params={'geo': selected_countries})
 label = data_raw.label 
 data = data_raw.to_dataframe()
 
-fig1 = None  
+
 fig1 = px.line(data, x='time', y='values', color='geo', title=f"Eurostat Data: {label}")
-st.plotly_chart(fig1)
 
 data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
 data_ie = data_raw_ie.to_dataframe()
