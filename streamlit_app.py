@@ -89,7 +89,7 @@ fig2.add_trace(
         yaxis='y2'
     )
 )
-fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Price Change:</b> %{customdata[2]:.1f}%')
+fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Price Change:</b> %{y}%')
 fig2.update_layout(
     title='Raw Milk Price in Ireland Over Time',
     xaxis=dict(title='Year'),
