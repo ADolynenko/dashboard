@@ -54,15 +54,16 @@ fig1 = px.line(data,
                title=f"Eurostat Data: {label}", 
                color_discrete_sequence=colors, 
                hover_data={'time': True, 'values': True, 'geo': True} ) 
+
 # Customize hovertext labels 
 fig1.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Year:</b> %{x}<br><b>Price:</b> %{y}')
+
 st.plotly_chart(fig1)
 
 data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
 data_ie = data_raw_ie.to_dataframe()
 data_ie['price_change'] = data_ie['values'].pct_change() * 100
 
-customdata=data_ie[['time', 'values', 'price_change']]
 fig2 = go.Figure()
 
 fig2.add_trace(
@@ -72,7 +73,8 @@ fig2.add_trace(
         mode='lines+markers',
         name='Raw Milk Price in Ireland',
         line=dict(color='brown'),
-        marker=dict(size=6)
+        marker=dict(size=6),
+        customdata=data_ie[['time', 'values', 'price_change']]
     )
 )
 
@@ -166,7 +168,6 @@ dairy_cows_range = np.linspace(min(EDA['values_num_cows']), max(EDA['values_num_
 milk_production_curve = (dairy_cows_range / 1000) * (apparent_milk_yield/ 1000)
 marker_size = (EDA['values'] / EDA['values'].max()) * 30
 
-customdata=EDA[['geo', 'values_num_cows', 'milk_prod_mln']]
 # Create Plotly figure
 fig3 = go.Figure()
 
@@ -182,7 +183,8 @@ fig3.add_trace(go.Scatter(
         opacity=0.8,
         #line=dict(width=1, color='black')
     ),
-    name='Country'
+    name='Country',
+    customdata=EDA[['geo', 'values_num_cows', 'milk_prod_mln']]
 ))
 
 
