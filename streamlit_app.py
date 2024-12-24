@@ -61,7 +61,7 @@ fig2.add_trace(
         y=data_ie['values'],
         mode='lines+markers',
         name='Raw Milk Price in Ireland',
-        line=dict(color='black'),
+        line=dict(color='lightblue'),
         marker=dict(size=6)
     )
 )
@@ -100,7 +100,7 @@ fig2.update_layout(
 
 # Adding annotations for non-zero price changes
 for i, row in data_ie.iterrows():
-    if row['price_change'] != 0:        
+    if row['price_change'] != np.nan:        
         fig2.add_annotation(
                 x=row['time'],
                 y=row['price_change'],
@@ -168,9 +168,9 @@ fig3.add_trace(go.Scatter(
     hovertext=EDA['geo'],
     marker=dict(
         size=marker_size,
-        color='red',
+        color='brown',
         opacity=0.8,
-        line=dict(width=1, color='black')
+        #line=dict(width=1, color='black')
     ),
     name='Country'
 ))
