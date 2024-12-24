@@ -143,7 +143,7 @@ milk_raw = get_eurostat_data(collection_code, params={#'geo': countries,
                                                       "time": year})
 cows_raw = get_eurostat_data(cows_code, params={#'geo': countries, 
                                                 "time": year})
-gdp = gdp_raw.to_dataframe()
+gdp = pd.read_csv('GDP per capita EU.csv')#gdp_raw.to_dataframe()
 collection = milk_raw.to_dataframe()
 cows = cows_raw.to_dataframe()
 
@@ -154,7 +154,7 @@ EDA = pd.merge(collection.drop(columns=['freq', 'milkitem', 'dairyprod']),
               )
 
 EDA = pd.merge(EDA,
-               gdp.drop(columns=['freq', 'unit', 'na_item']),
+               gdp.drop(columns=['unit', 'category']),
                on=['geo', 'time']
               )
 
