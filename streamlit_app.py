@@ -61,7 +61,7 @@ fig2.add_trace(
         y=data_ie['values'],
         mode='lines+markers',
         name='Raw Milk Price in Ireland',
-        line=dict(color='lightblue'),
+        line=dict(color='brown'),
         marker=dict(size=6)
     )
 )
