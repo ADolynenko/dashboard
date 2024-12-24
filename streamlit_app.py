@@ -120,8 +120,8 @@ for i, row in data_ie.iterrows():
                 ay=20 if row['price_change'] > 0 else -20,
                 font=dict(size=10)
             )
+fig2.update_traces(hovertemplate='<b>Year:</b> %{customdata[0]}<br><b>Raw Milk Price:</b> %{customdata[1]}<br><b>Price Change:</b> %{customdata[2]}%' )
 
-# Show in Streamlit
 st.plotly_chart(fig2)
 
 gdp_code = "tipsna40"
@@ -228,6 +228,7 @@ fig3.update_layout(
     legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
     template='plotly_white'
 )
+fig3.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Dairy Cows:</b> %{customdata[1]}<br><b>Raw Milk Produced:</b> %{customdata[2]} mln t'
 st.plotly_chart(fig3)
 
 st.markdown("Data source: [Eurostat](https://ec.europa.eu/eurostat/en/web/main/data/database)")
