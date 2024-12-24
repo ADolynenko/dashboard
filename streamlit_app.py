@@ -62,6 +62,7 @@ data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
 data_ie = data_raw_ie.to_dataframe()
 data_ie['price_change'] = data_ie['values'].pct_change() * 100
 
+customdata=EDA[['time', 'values', 'price_change']]
 fig2 = go.Figure()
 
 fig2.add_trace(
@@ -120,7 +121,7 @@ for i, row in data_ie.iterrows():
                 ay=20 if row['price_change'] > 0 else -20,
                 font=dict(size=10)
             )
-fig2.update_traces(hovertemplate='<b>Year:</b> %{customdata[0]}<br><b>Raw Milk Price:</b> %{customdata[1]}<br><b>Price Change:</b> %{customdata[2]}%')
+fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Raw Milk Price:</b> %{customdata[1]}<br><b>Price Change:</b> %{customdata[2]}%')
 
 st.plotly_chart(fig2)
 
@@ -165,7 +166,7 @@ dairy_cows_range = np.linspace(min(EDA['values_num_cows']), max(EDA['values_num_
 milk_production_curve = (dairy_cows_range / 1000) * (apparent_milk_yield/ 1000)
 marker_size = (EDA['values'] / EDA['values'].max()) * 30
 
-
+customdata=EDA[['geo', 'values_num_cows', 'milk_prod_mln']]
 # Create Plotly figure
 fig3 = go.Figure()
 
