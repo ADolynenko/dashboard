@@ -4,7 +4,7 @@ import plotly.express as px
 from eurostatapiclient import EurostatAPIClient
 import plotly.graph_objects as go
 import numpy as np
-
+st.title('Overview of raw milk prices and milk yield in Ireland and EU')
 #choose version, format and language
 VERSION = '1.0'
 FORMAT = 'json'
