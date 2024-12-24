@@ -45,35 +45,16 @@ selected_countries = st.multiselect("Select Countries",
 data_raw = get_eurostat_data(dataset_code, params={'geo': selected_countries})
 label = data_raw.label 
 data = data_raw.to_dataframe()
-
-if data is not None:
-    try:
-        if 'time' in data.columns and 'geo' in data.columns:            
-            fig1 = px.line(data, x='time', y='values', color='geo',
-                          title=f"Eurostat Data: {label}")
-            st.plotly_chart(fig1)
-        else:
-            st.warning("The dataset doesn't contain required columns ('time' or 'geo'). Adapt the plot accordingly.")
-
-    except KeyError as e:
-        st.error(f"Error creating plot: Column '{e}' not found. Please inspect the raw data to see the available columns.")
-    except Exception as e:
-        st.error(f"An error occurred during plotting: {e}")
-else:
-    st.write("Failed to retrieve data. Check the dataset code and internet connection.")
-
-
-
-
+   
+fig1 = px.line(data, x='time', y='values', color='geo', title=f"Eurostat Data: {label}")
+st.plotly_chart(fig1)
 
 data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
 data_ie = data_raw_ie.to_dataframe()
 data_ie['price_change'] = data_ie['values'].pct_change() * 100
 
-# Create the figure
 fig2 = go.Figure()
 
-# Line plot 
 fig2.add_trace(
     go.Scatter(
         x=data_ie['time'],
