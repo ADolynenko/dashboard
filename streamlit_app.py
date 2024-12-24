@@ -242,4 +242,8 @@ fig3.update_layout(
 # Display in Streamlit
 st.plotly_chart(fig3)
 col1, col2 = st.columns(2)
-
+with 
+col1: st.plotly_chart(fig1) 
+    st.plotly_chart(fig2) 
+with 
+col2: st.plotly_chart(fig3)
