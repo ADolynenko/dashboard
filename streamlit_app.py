@@ -144,6 +144,7 @@ milk_raw = get_eurostat_data(collection_code, params={#'geo': countries,
 cows_raw = get_eurostat_data(cows_code, params={#'geo': countries, 
                                                 "time": year})
 gdp = pd.read_csv('GDP per capita EU.csv')#gdp_raw.to_dataframe()
+gdp.rename(columns={'year': 'time', 'country': 'geo', 'value': 'values'}, inplace=True)
 collection = milk_raw.to_dataframe()
 cows = cows_raw.to_dataframe()
 
