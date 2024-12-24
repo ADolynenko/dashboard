@@ -49,7 +49,7 @@ data = data_raw.to_dataframe()
 if data is not None:
     try:
         if 'time' in data.columns and 'geo' in data.columns:            
-            fig = px.line(data, x='time', y='values', color='geo',
+            fig1 = px.line(data, x='time', y='values', color='geo',
                           title=f"Eurostat Data: {label}")
             st.plotly_chart(fig)
         else:
@@ -71,10 +71,10 @@ data_ie = data_raw_ie.to_dataframe()
 data_ie['price_change'] = data_ie['values'].pct_change() * 100
 
 # Create the figure
-fig = go.Figure()
+fig2 = go.Figure()
 
 # Line plot 
-fig.add_trace(
+fig2.add_trace(
     go.Scatter(
         x=data_ie['time'],
         y=data_ie['values'],
@@ -86,7 +86,7 @@ fig.add_trace(
 )
 
 # Bar plot for percentage price change
-fig.add_trace(
+fig2.add_trace(
     go.Bar(
         x=data_ie['time'],
         y=data_ie['price_change'],
@@ -97,7 +97,7 @@ fig.add_trace(
     )
 )
 
-fig.update_layout(
+fig2.update_layout(
     title='Raw Milk Price in Ireland Over Time',
     xaxis=dict(title='Year'),
     yaxis=dict(title='Raw Milk Price (per 100 kg)', 
@@ -120,7 +120,7 @@ fig.update_layout(
 # Adding annotations for non-zero price changes
 for i, row in data_ie.iterrows():
     if row['price_change'] != 0:        
-        fig.add_annotation(
+        fig2.add_annotation(
                 x=row['time'],
                 y=row['price_change'],
                 text=f"{row['price_change']:.1f}%",
@@ -132,7 +132,7 @@ for i, row in data_ie.iterrows():
             )
 
 # Show in Streamlit
-st.plotly_chart(fig)
+st.plotly_chart(fig2)
 
 gdp_code = "tipsna40"
 collection_code = "tag00041"
@@ -177,10 +177,10 @@ marker_size = (EDA['values'] / EDA['values'].max()) * 30
 
 
 # Create Plotly figure
-fig = go.Figure()
+fig3 = go.Figure()
 
 # Scatter plot for countries
-fig.add_trace(go.Scatter(
+fig3.add_trace(go.Scatter(
     x=EDA['values_num_cows'],
     y=EDA['milk_prod_mln'],
     mode='markers+text',
@@ -196,7 +196,7 @@ fig.add_trace(go.Scatter(
 
 
 # Add line for average milk yield
-fig.add_trace(go.Scatter(
+fig3.add_trace(go.Scatter(
     x=dairy_cows_range,
     y=milk_production_curve,
     mode='lines',
@@ -206,7 +206,7 @@ fig.add_trace(go.Scatter(
 
 for index, row in EDA.iterrows():
     if row['geo'] in ['IE', 'DK', 'NL']:
-        fig.add_annotation(
+        fig3.add_annotation(
             x=np.log10(row['values_num_cows']),
             y=row['milk_prod_mln'],
             text=row['geo'],
@@ -216,7 +216,7 @@ for index, row in EDA.iterrows():
         )
 
 # Set log scale for x-axis
-fig.update_xaxes(
+fig3.update_xaxes(
     title_text='Dairy cows (thousand heads)',
     type='log',
     tickvals=[1, 10, 100, 1000],
@@ -225,13 +225,13 @@ fig.update_xaxes(
 )
 
 # Set y-axis
-fig.update_yaxes(
+fig3.update_yaxes(
     title_text='Raw milk produced (mln t)',
     range=[0, 40]
 )
 
 # Update layout
-fig.update_layout(
+fig3.update_layout(
     title=f'Dairy Cows and Milk Production with Apparent Milk Yield in EU ({year})',
     xaxis=dict(showgrid=True),
     yaxis=dict(showgrid=True),
@@ -240,6 +240,6 @@ fig.update_layout(
 )
 
 # Display in Streamlit
-st.plotly_chart(fig)
-
+st.plotly_chart(fig3)
+col1, col2 = st.columns(2)
 
