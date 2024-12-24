@@ -77,7 +77,7 @@ fig2.add_trace(
         customdata=data_ie[['time', 'values', 'price_change']].values
     )
 )
-
+fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Raw Milk Price:</b> %{customdata[1]:.1f}<br><b>Price Change:</b> %{customdata[2]:.1f}%')
 # Bar plot for percentage price change
 fig2.add_trace(
     go.Bar(
@@ -89,7 +89,7 @@ fig2.add_trace(
         yaxis='y2'
     )
 )
-
+fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Price Change:</b> %{customdata[2]:.1f}%')
 fig2.update_layout(
     title='Raw Milk Price in Ireland Over Time',
     xaxis=dict(title='Year'),
@@ -123,7 +123,7 @@ for i, row in data_ie.iterrows():
                 ay=20 if row['price_change'] > 0 else -20,
                 font=dict(size=10)
             )
-fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Raw Milk Price:</b> %{customdata[1]:.1f}<br><b>Price Change:</b> %{customdata[2]:.1f}%')
+
 
 st.plotly_chart(fig2)
 
