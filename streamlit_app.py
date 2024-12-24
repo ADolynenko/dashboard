@@ -72,7 +72,7 @@ fig2.add_trace(
         y=data_ie['values'],
         mode='lines+markers',
         name='Raw Milk Price in Ireland',
-        line=dict(color='brown'),
+        line=dict(color='#8B4513'),
         marker=dict(size=6),
         customdata=data_ie[['time', 'values', 'price_change']].values
     )
@@ -182,7 +182,7 @@ fig3.add_trace(go.Scatter(
     hovertext=EDA['geo'],
     marker=dict(
         size=marker_size,
-        color='brown',
+        color='#8B4513',
         opacity=0.8,
         #line=dict(width=1, color='black')
     ),
