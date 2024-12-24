@@ -199,7 +199,7 @@ fig3.add_trace(go.Scatter(
     mode='lines',
     line=dict(color='lightgray', dash='dash'),
     name=f'Average apparent milk yield ({year})',
-    customdata=np.full((len(dairy_cows_range), 1), apparent_milk_yield)
+    customdata=apparent_milk_yield
 ))
 fig3.update_traces(selector=dict(name='Average apparent milk yield ({year})'),
                    hovertemplate='<b>Average apparent milk yield:</b> %{customdata[0]:.1f} kg/cow<br>')
