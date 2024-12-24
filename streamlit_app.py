@@ -181,7 +181,7 @@ fig3.add_trace(go.Scatter(
     x=dairy_cows_range,
     y=milk_production_curve,
     mode='lines',
-    line=dict(color='green', dash='dash'),
+    line=dict(color='lightgray', dash='dash'),
     name=f'Average apparent milk yield ({year})'
 ))
 
