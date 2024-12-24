@@ -100,7 +100,7 @@ fig2.update_layout(
 
 # Adding annotations for non-zero price changes
 for i, row in data_ie.iterrows():
-    if row['price_change'] != np.nan:        
+    if pd.notna(row['price_change']) and row['price_change'] != 0:        
         fig2.add_annotation(
                 x=row['time'],
                 y=row['price_change'],
