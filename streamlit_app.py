@@ -186,7 +186,7 @@ fig3.add_trace(go.Scatter(
     name='Country',
     customdata=EDA[['geo', 'values_num_cows', 'milk_prod_mln']].values
 ))
-
+fig3.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Dairy Cows (,000 heads):</b> %{customdata[1]:.1f}<br><b>Raw Milk Produced:</b> %{customdata[2]:.1f} mln t')
 
 # Add line for average milk yield
 fig3.add_trace(go.Scatter(
@@ -196,6 +196,7 @@ fig3.add_trace(go.Scatter(
     line=dict(color='lightgray', dash='dash'),
     name=f'Average apparent milk yield ({year})'
 ))
+fig3.update_traces(hovertemplate='<b>Average apparent milk yield:</b> %{apparent_milk_yield:.1f}<br>')
 
 for index, row in EDA.iterrows():
     if row['geo'] in ['IE', 'DK', 'NL']:
@@ -207,6 +208,7 @@ for index, row in EDA.iterrows():
             ax=15, ay=-20,
             font=dict(size=10)
         )
+
 
 # Set log scale for x-axis
 fig3.update_xaxes(
@@ -231,7 +233,7 @@ fig3.update_layout(
     legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
     template='plotly_white'
 )
-fig3.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Dairy Cows (,000 heads):</b> %{customdata[1]:.1f}<br><b>Raw Milk Produced:</b> %{customdata[2]:.1f} mln t')
+
 st.plotly_chart(fig3)
 
 st.markdown("Data source: [Eurostat](https://ec.europa.eu/eurostat/en/web/main/data/database)")
