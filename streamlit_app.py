@@ -34,7 +34,12 @@ def get_eurostat_data(dataset_code, params={}):
 #code for the raw milk dataset
 dataset_code = "tag00070"
 selected_countries = st.multiselect("Select Countries",                                     
-                                   ['IE', 'DK', 'NL']
+                                   ['IE', 'DK', 'NL', 'AT', 'BE', 'BG', 
+                                    'CY', 'CZ', 'DE', 'EE', 'EL', 'ES', 
+                                    'FI', 'FR', 'HR', 'HU', 'IT', 'LT', 
+                                    'LU', 'LV', 'MT', 'PL', 'PT', 'RO', 
+                                    'SE', 'SI', 'SK'], 
+                                    default=['IE']
                                    )  # Allow user selection
 
 data_raw = get_eurostat_data(dataset_code, params={'geo': selected_countries})
