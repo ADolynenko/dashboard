@@ -31,7 +31,7 @@ def get_eurostat_data(dataset_code, params={}):
     except Exception as e:
         st.error(f"Error fetching data from Eurostat: {e}")
         return None
-#code for the raw milk dataset
+
 dataset_code = "tag00070"
 selected_countries = st.multiselect("Select Countries",                                     
                                    ['IE', 'DK', 'NL', 'AT', 'BE', 'BG', 
@@ -46,7 +46,20 @@ data_raw = get_eurostat_data(dataset_code, params={'geo': selected_countries})
 label = data_raw.label 
 data = data_raw.to_dataframe()
 
-fig1 = px.line(data, x='time', y='values', color='geo', title=f"Eurostat Data: {label}")
+fig1 = go.Figure()  
+for country in data['geo'].unique(): 
+    country_data = data[data['geo'] == country] 
+    fig1.add_trace(go.Scatter( x=country_data['time'], 
+                              y=country_data['values'], 
+                              mode='lines+markers', name=country )) 
+fig1.update_layout(title=f"Eurostat Data: {label}", 
+                       xaxis=dict(title='Time'), 
+                       yaxis=dict(title='Values'), 
+                       legend=dict(orientation='h', 
+                                   yanchor='bottom', 
+                                   y=1.02, xanchor='right', 
+                                   x=1), 
+                       template='plotly_white' ) 
 st.plotly_chart(fig1)
 
 data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
