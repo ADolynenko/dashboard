@@ -56,7 +56,7 @@ fig1 = px.line(data,
                hover_data={'time': True, 'values': True, 'geo': True} ) 
 
 # Customize hovertext labels 
-fig1.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Year:</b> %{x}<br><b>Price:</b> %{y}')
+fig1.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Year:</b> %{x}<br><b>Price:</b> %{y:.1f}')
 
 st.plotly_chart(fig1)
 
@@ -123,7 +123,7 @@ for i, row in data_ie.iterrows():
                 ay=20 if row['price_change'] > 0 else -20,
                 font=dict(size=10)
             )
-fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Raw Milk Price:</b> %{customdata[1]}<br><b>Price Change:</b> %{customdata[2]}%')
+fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Raw Milk Price:</b> %{customdata[1]:.1f}<br><b>Price Change:</b> %{customdata[2]:.1f}%')
 
 st.plotly_chart(fig2)
 
@@ -184,7 +184,7 @@ fig3.add_trace(go.Scatter(
         #line=dict(width=1, color='black')
     ),
     name='Country',
-    customdata=EDA[['geo', 'values_num_cows', 'milk_prod_mln']]
+    customdata=EDA[['geo', 'values_num_cows', 'milk_prod_mln']].values
 ))
 
 
@@ -231,7 +231,7 @@ fig3.update_layout(
     legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
     template='plotly_white'
 )
-fig3.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Dairy Cows:</b> %{customdata[1]}<br><b>Raw Milk Produced:</b> %{customdata[2]} mln t')
+fig3.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Dairy Cows (,000 heads):</b> %{customdata[1]:.1f}<br><b>Raw Milk Produced:</b> %{customdata[2]:.1f} mln t')
 st.plotly_chart(fig3)
 
 st.markdown("Data source: [Eurostat](https://ec.europa.eu/eurostat/en/web/main/data/database)")
