@@ -222,4 +222,4 @@ fig3.update_layout(
 st.plotly_chart(fig3)
 
 st.markdown("Data source: [Eurostat](https://ec.europa.eu/eurostat/en/web/main/data/database)")
-st.markdown("The copyright for the editorial content of this website, which is owned by the EU, is licensed under the Creative Commons Attribution 4.0 International licence.[link](https://creativecommons.org/licenses/by/4.0/)") 
+st.markdown("The copyright for the editorial content of the Eurostat website, which is owned by the EU, is licensed under the Creative Commons Attribution 4.0 International licence.[link](https://creativecommons.org/licenses/by/4.0/)") 
