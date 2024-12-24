@@ -74,7 +74,7 @@ fig2.add_trace(
         name='Raw Milk Price in Ireland',
         line=dict(color='brown'),
         marker=dict(size=6),
-        customdata=data_ie[['time', 'values', 'price_change']]
+        customdata=data_ie[['time', 'values', 'price_change']].values
     )
 )
 
