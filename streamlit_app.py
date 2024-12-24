@@ -55,7 +55,7 @@ fig1 = px.line(data,
                color_discrete_sequence=colors, 
                hover_data={'time': True, 'values': True, 'geo': True} ) 
 # Customize hovertext labels 
-fig1.update_traces(hovertemplate='<b>Country:</b> %{customdata[2]}<br><b>Year:</b> %{x}<br><b>Price:</b> %{y}')
+fig1.update_traces(hovertemplate='<b>Country:</b> %{color}<br><b>Year:</b> %{x}<br><b>Price:</b> %{y}')
 st.plotly_chart(fig1)
 
 data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
