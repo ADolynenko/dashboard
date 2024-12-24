@@ -198,11 +198,10 @@ fig3.add_trace(go.Scatter(
     y=milk_production_curve,
     mode='lines',
     line=dict(color='lightgray', dash='dash'),
-    name=f'Average apparent milk yield ({year})',
-    customdata=apparent_milk_yield
+    name=f'Average apparent milk yield ({year})'
 ))
 fig3.update_traces(selector=dict(name='Average apparent milk yield ({year})'),
-                   hovertemplate='<b>Average apparent milk yield:</b> %{customdata[0]:.1f} kg/cow<br>')
+                   hovertemplate='<b>Average apparent milk yield:</b> %{apparent_milk_yield:.1f} kg/cow<br>')
 
 for index, row in EDA.iterrows():
     if row['geo'] in ['IE', 'DK', 'NL']:
