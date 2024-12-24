@@ -46,7 +46,7 @@ data_raw = get_eurostat_data(dataset_code, params={'geo': selected_countries})
 label = data_raw.label 
 data = data_raw.to_dataframe()
 
-colors = ['#8B4513', '#A9A9A9', '#D2B48C', '#696969', '#D2691E', '#808080', '#A0522D',
+colors = ['#8B4513', '#A9A9A9', '#D2B48C', '#696969', '#D2691E', '#808080', '#A0522D']
 fig1 = px.line(data, 
                x='time', 
                y='values', 
