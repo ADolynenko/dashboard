@@ -51,7 +51,7 @@ if data is not None:
         if 'time' in data.columns and 'geo' in data.columns:            
             fig1 = px.line(data, x='time', y='values', color='geo',
                           title=f"Eurostat Data: {label}")
-            st.plotly_chart(fig)
+            st.plotly_chart(fig1)
         else:
             st.warning("The dataset doesn't contain required columns ('time' or 'geo'). Adapt the plot accordingly.")
 
