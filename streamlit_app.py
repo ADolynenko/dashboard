@@ -163,7 +163,6 @@ EDA = pd.merge(EDA,
 EDA = EDA[EDA['geo'].isin(countries)]
 
 EDA['milk_yield'] = EDA['values_milk_on_farms'] / EDA['values_num_cows']
-#EDA['apparent_milk_yield'] = EDA['milk_yield'] * 1000
 apparent_milk_yield = EDA['milk_yield'].mean()*1000
 # Calculate additional variables
 EDA['milk_prod_mln'] = EDA['values_milk_on_farms'] / 1000
@@ -207,7 +206,7 @@ for index, row in EDA.iterrows():
             y=row['milk_prod_mln'],
             text=row['geo'],
             arrowhead=2,
-            ax=20, ay=-30,
+            ax=10, ay=-15,
             font=dict(size=10)
         )
 
