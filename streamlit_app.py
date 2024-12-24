@@ -62,7 +62,7 @@ data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
 data_ie = data_raw_ie.to_dataframe()
 data_ie['price_change'] = data_ie['values'].pct_change() * 100
 
-customdata=EDA[['time', 'values', 'price_change']]
+customdata=data_ie[['time', 'values', 'price_change']]
 fig2 = go.Figure()
 
 fig2.add_trace(
