@@ -77,7 +77,8 @@ fig2.add_trace(
         customdata=data_ie[['time', 'values', 'price_change']].values
     )
 )
-fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Raw Milk Price:</b> %{customdata[1]:.1f}<br><b>Price Change:</b> %{customdata[2]:.1f}%')
+fig2.update_traces(selector=dict(name='Raw Milk Price in Ireland'),
+                   hovertemplate='<b>Year:</b> %{x}<br><b>Raw Milk Price:</b> %{customdata[1]:.1f}<br><b>Price Change:</b> %{customdata[2]:.1f}%')
 # Bar plot for percentage price change
 fig2.add_trace(
     go.Bar(
@@ -89,7 +90,9 @@ fig2.add_trace(
         yaxis='y2'
     )
 )
-fig2.update_traces(hovertemplate='<b>Year:</b> %{x}<br><b>Price Change:</b> %{y:.1f}%')
+fig2.update_traces(selector=dict(name='Price Change (%)'),
+                   hovertemplate='<b>Year:</b> %{x}<br><b>Price Change:</b> %{y:.1f}%')
+
 fig2.update_layout(
     title='Raw Milk Price in Ireland Over Time',
     xaxis=dict(title='Year'),
@@ -183,10 +186,11 @@ fig3.add_trace(go.Scatter(
         opacity=0.8,
         #line=dict(width=1, color='black')
     ),
-    #name='Country',
+    name='Country',
     customdata=EDA[['geo', 'values_num_cows', 'milk_prod_mln']].values
 ))
-fig3.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Dairy Cows (,000 heads):</b> %{customdata[1]:.1f}<br><b>Raw Milk Produced:</b> %{customdata[2]:.1f} mln t')
+fig3.update_traces(selector=dict(name='Country'),
+                   hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Dairy Cows (,000 heads):</b> %{customdata[1]:.1f}<br><b>Raw Milk Produced:</b> %{customdata[2]:.1f} mln t')
 
 # Add line for average milk yield
 fig3.add_trace(go.Scatter(
@@ -194,10 +198,11 @@ fig3.add_trace(go.Scatter(
     y=milk_production_curve,
     mode='lines',
     line=dict(color='lightgray', dash='dash'),
-    #name=f'Average apparent milk yield ({year})',
+    name=f'Average apparent milk yield ({year})',
     customdata=np.full((len(dairy_cows_range), 1), apparent_milk_yield)
 ))
-fig3.update_traces(hovertemplate='<b>Average apparent milk yield:</b> %{customdata[0]:.1f} kg/cow<br>')
+fig3.update_traces(selector=dict(name='Average apparent milk yield ({year})'),
+                   hovertemplate='<b>Average apparent milk yield:</b> %{customdata[0]:.1f} kg/cow<br>')
 
 for index, row in EDA.iterrows():
     if row['geo'] in ['IE', 'DK', 'NL']:
