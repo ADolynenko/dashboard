@@ -58,6 +58,18 @@ fig1 = px.line(data,
 # Customize hovertext labels 
 fig1.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Year:</b> %{x}<br><b>Price:</b> %{y:.1f}')
 
+fig1.update_layout(
+    xaxis=dict(title='Year'),
+    yaxis=dict(title='Raw Milk Price (per 100 kg)', 
+               titlefont=dict(color='black'), 
+               showgrid=True,
+              ),
+    legend=dict(orientation='h', 
+                yanchor='bottom', 
+                y=1.02, 
+                xanchor='right', x=1)
+)
+
 st.plotly_chart(fig1)
 
 data_raw_ie = get_eurostat_data(dataset_code, params={'geo': ['IE']})
