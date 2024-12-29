@@ -53,7 +53,9 @@ fig1 = px.line(data,
                color='geo', 
                title=f"Eurostat Data: {label}", 
                color_discrete_sequence=colors, 
-               hover_data={'time': True, 'values': True, 'geo': True} ) 
+               hover_data={'time': True, 'values': True, 'geo': True},
+              labels={'geo': 'Country'}
+              ) 
 
 # Customize hovertext labels 
 fig1.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Year:</b> %{x}<br><b>Price:</b> %{y:.1f}')
