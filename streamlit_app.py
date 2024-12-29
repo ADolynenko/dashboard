@@ -65,11 +65,7 @@ fig1.update_layout(
     yaxis=dict(title='Raw Milk Price (per 100 kg)', 
                titlefont=dict(color='black'), 
                showgrid=True,
-              ),
-    legend=dict(orientation='h', 
-                yanchor='bottom', 
-                y=1.02, 
-                xanchor='right', x=1)
+              )
 )
 
 st.plotly_chart(fig1)
