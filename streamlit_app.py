@@ -62,11 +62,10 @@ fig1.update_traces(hovertemplate='<b>Country:</b> %{customdata[0]}<br><b>Year:</
 
 fig1.update_layout(
     xaxis=dict(title='Year'),
-    yaxis=dict(title='Raw Milk Price (per 100 kg)', 
-               titlefont=dict(color='black'), 
+    yaxis=dict(title=dict(text='Raw Milk Price (per 100 kg)', 
+               font=dict(color='black')), 
                showgrid=True,
               )
-)
 
 st.plotly_chart(fig1)
 
@@ -106,15 +105,15 @@ fig2.update_traces(selector=dict(name='Price Change (%)'),
 fig2.update_layout(
     title='Raw Milk Price in Ireland Over Time',
     xaxis=dict(title='Year'),
-    yaxis=dict(title='Raw Milk Price (per 100 kg)', 
-               titlefont=dict(color='black'), 
+    yaxis=dict(title=dict(text='Raw Milk Price (per 100 kg)', 
+               font=dict(color='black')), 
                showgrid=True,
               ),
     yaxis2=dict(
         title='Percentage Change (%)',
         overlaying='y',
         side='right',
-        titlefont=dict(color='gray'),
+        title=dict(font=dict(color='gray'),
         showgrid=False
     ),
     legend=dict(orientation='h', 
